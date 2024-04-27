@@ -10,6 +10,7 @@ import {
   asyncUpVoteThread,
 } from '../states/threads/action';
 import ThreadsList from '../components/fragments/ThreadsList';
+import CategoriesThread from '../components/fragments/CategoriesThread';
 
 export default function Threads({ onToggleModal }) {
   const [filter, setFilter] = useState('');
@@ -44,32 +45,13 @@ export default function Threads({ onToggleModal }) {
   }));
   return (
     <div className="container mx-auto lg:grid lg:grid-cols-4">
-      <div className="lg:col-span-3 lg:overflow-y-auto lg:min-h-[570px] lg:max-h-[570px] ">
-        {Array.from(categories).map((category) => {
-          if (filter === category) {
-            return (
-              <button
-                key={category}
-                className="text-white p-1 border border-primary"
-                onClick={() => setFilter('')}
-                type="button"
-              >
-                {`#${category}`}
-              </button>
-            );
-          }
-          return (
-            <button
-              key={category}
-              className="text-white p-1 border border-primary"
-              onClick={() => setFilter(category)}
-              type="button"
-            >
-              {`#${category}`}
-            </button>
-          );
-        })}
+      <div className="lg:col-span-3 lg:overflow-y-auto lg:min-h-[570px] lg:max-h-[570px]">
         <AddNewThreads onToggleModal={onToggleModal} />
+        <CategoriesThread
+          categories={categories}
+          filter={filter}
+          setFilter={setFilter}
+        />
         <ThreadsList
           threads={
             filter

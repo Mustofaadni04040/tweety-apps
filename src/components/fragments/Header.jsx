@@ -46,7 +46,6 @@ export default function Header({ authUser, logout }) {
             </ul>
           </nav>
 
-          <img src={authUser.avatar} alt="Profile Icon" />
           <button
             type="button"
             className="text-primary flex items-center gap-1 hover:text-[#3825B5] duration-200"
@@ -55,6 +54,11 @@ export default function Header({ authUser, logout }) {
             <AiOutlineLogout />
             <span className="text-sm">Sign Out</span>
           </button>
+          <img
+            src={authUser.avatar}
+            alt="Profile"
+            className="w-7 h-7 rounded-full"
+          />
         </div>
       </div>
     </section>

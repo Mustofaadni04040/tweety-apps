@@ -10,6 +10,7 @@ import RegisterPage from './pages/RegisterPage';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 import DetailThreads from './pages/DetailThreadsPage';
+import Loading from './components/elements/loading/Loading';
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -39,25 +40,31 @@ function App() {
 
   if (authUser === null) {
     return (
-      <div className="font-inter">
-        <Routes>
-          <Route path="/*" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-        </Routes>
-      </div>
+      <>
+        <Loading />
+        <div className="font-inter">
+          <Routes>
+            <Route path="/*" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="font-inter">
-      <Header logout={onSignOut} authUser={authUser} />
-      {modal && <Modal onToggleModal={toggleModal} />}
-      <Routes>
-        <Route path="/" element={<Threads onToggleModal={toggleModal} />} />
-        <Route path="/leaderboards" element={<Leaderboards />} />
-        <Route path="/threads/:id" element={<DetailThreads />} />
-      </Routes>
-    </div>
+    <>
+      <Loading />
+      <div className="font-inter">
+        <Header logout={onSignOut} authUser={authUser} />
+        {modal && <Modal onToggleModal={toggleModal} />}
+        <Routes>
+          <Route path="/" element={<Threads onToggleModal={toggleModal} />} />
+          <Route path="/leaderboards" element={<Leaderboards />} />
+          <Route path="/threads/:id" element={<DetailThreads />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 

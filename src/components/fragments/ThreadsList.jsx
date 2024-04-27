@@ -9,7 +9,7 @@ export default function ThreadsList({
   neutralizeVote,
 }) {
   return (
-    <section className="mt-7 p-5 mx-auto max-w-3xl">
+    <section className="p-5 w-full max-w-3xl mx-auto flex flex-col gap-3">
       {threads.map((thread) => (
         <ThreadItem
           key={thread.id}
