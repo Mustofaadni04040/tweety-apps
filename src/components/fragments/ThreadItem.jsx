@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import parser from 'html-react-parser/lib/index';
 import PropTypes from 'prop-types';
-import {
-  FaRegThumbsUp,
-  FaRegThumbsDown,
-  FaThumbsUp,
-  FaThumbsDown,
-} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineComment } from 'react-icons/ai';
 import postedAt from '../../utils';
 import Card from '../elements/card/Card';
+import VoteButton from './VoteButton';
 
 export default function ThreadItem({
   id,
@@ -27,21 +23,20 @@ export default function ThreadItem({
   authUser,
 }) {
   const [isReadMore, setIsReadMore] = useState(true);
-  const isUpVoted = upVotesBy.includes(authUser);
-  const isDownVoted = downVotesBy.includes(authUser);
-
-  function downVoteClick() {
-    downVote(id);
-  }
-  function upVoteClick() {
-    upVote(id);
-  }
-  function neutralizeVoteClick() {
-    neutralizeVote(id);
-  }
+  const navigate = useNavigate();
 
   function toggleReadMore() {
     setIsReadMore(!isReadMore);
+  }
+
+  function onThreadClick() {
+    navigate(`/threads/${id}`);
+  }
+
+  function onThreadPress(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      navigate(`/threads/${id}`);
+    }
   }
 
   return (
@@ -61,7 +56,16 @@ export default function ThreadItem({
 
       <div>
         <div className="mb-3">
-          <h1 className="text-lg font-bold text-primary mb-3">{title}</h1>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={onThreadClick}
+            onKeyDown={onThreadPress}
+          >
+            <h1 className="text-lg font-bold text-primary mb-3 break-words">
+              {title}
+            </h1>
+          </div>
           <div className="text-base text-slate-500 break-words text-ellipsis">
             {parser(isReadMore ? body.slice(0, 200) : body)}
             {body.length > 200 && (
@@ -78,44 +82,15 @@ export default function ThreadItem({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1">
-            {isUpVoted ? (
-              <button
-                onClick={neutralizeVoteClick}
-                type="button"
-                aria-label="thumb-up"
-              >
-                <FaThumbsUp className="text-primary text-sm" />
-              </button>
-            ) : (
-              <button onClick={upVoteClick} type="button" aria-label="thumb-up">
-                <FaRegThumbsUp className="text-slate-400 text-sm" />
-              </button>
-            )}
-            <p>{upVotesBy.length}</p>
-          </div>
-
-          <div className="flex items-center gap-1">
-            {isDownVoted ? (
-              <button
-                onClick={neutralizeVoteClick}
-                type="button"
-                aria-label="thumb-down"
-              >
-                <FaThumbsDown className="text-primary text-sm" />
-              </button>
-            ) : (
-              <button
-                onClick={downVoteClick}
-                aria-label="thumb-down"
-                type="button"
-              >
-                <FaRegThumbsDown className="text-slate-400 text-sm" />
-              </button>
-            )}
-            <p>{downVotesBy.length}</p>
-          </div>
-
+          <VoteButton
+            id={id}
+            authUser={authUser}
+            upVote={upVote}
+            downVote={downVote}
+            neutralizeVote={neutralizeVote}
+            upVotesBy={upVotesBy}
+            downVotesBy={downVotesBy}
+          />
           <div className="flex items-center gap-1">
             <AiOutlineComment className="text-slate-400" />
             <p>{totalComments}</p>

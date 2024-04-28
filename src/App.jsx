@@ -61,7 +61,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Threads onToggleModal={toggleModal} />} />
           <Route path="/leaderboards" element={<Leaderboards />} />
-          <Route path="/threads/:id" element={<DetailThreads />} />
+          <Route path="/threads/:threadId" element={<DetailThreads />} />
         </Routes>
       </div>
     </>

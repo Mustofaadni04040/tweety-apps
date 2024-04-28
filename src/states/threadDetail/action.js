@@ -178,7 +178,7 @@ function asyncDownVoteComment(commentId) {
     dispatch(downVoteCommentActionCreator(commentId, authUser.id));
 
     try {
-      api.downVoteComment(threadDetail.id, commentId);
+      await api.downVoteComment(threadDetail.id, commentId);
     } catch (error) {
       alert(error.message);
     }

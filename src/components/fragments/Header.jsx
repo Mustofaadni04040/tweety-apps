@@ -9,7 +9,7 @@ export default function Header({ authUser, logout }) {
   const location = useLocation();
 
   return (
-    <section className="shadow bg-white">
+    <section className="shadow bg-white sticky top-0 left-0 z-50">
       <div className="container p-5 mx-auto flex items-center justify-between">
         <div>
           <Logo />
