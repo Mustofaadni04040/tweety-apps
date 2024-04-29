@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import postedAt from '../../utils';
 import VoteButton from './VoteButton';
 import { userShape } from './ThreadItem';
+import Card from '../elements/card/Card';
 
 export default function CommentItem({
   id,
@@ -18,13 +19,20 @@ export default function CommentItem({
   authUser,
 }) {
   return (
-    <>
-      <div className="flex items-center justify-between">
-        <p className="text-primary text-xl font-bold">{owner.name}</p>
+    <Card>
+      <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-3">
+          <img
+            src={owner.avatar}
+            alt={owner.name}
+            className="w-8 h-8 rounded-full"
+          />
+          <p className="text-primary text-xl font-bold">{owner.name}</p>
+        </div>
         <p className="text-slate-400 text-sm">{postedAt(createdAt)}</p>
       </div>
 
-      <div className="text-base text-slate-500 break-words text-ellipsis mb-3">
+      <div className="text-base text-slate-500 text-ellipsis mb-3 break-words">
         {parser(content)}
       </div>
 
@@ -39,7 +47,7 @@ export default function CommentItem({
           downVotesBy={downVotesBy}
         />
       </div>
-    </>
+    </Card>
   );
 }
 

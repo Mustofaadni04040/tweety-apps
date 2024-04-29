@@ -15,19 +15,18 @@ export default function CommentList({
     );
   }
   return (
-    <>
+    <section className="w-full max-w-3xl mx-auto flex flex-col gap-3">
       {comments.map((comment) => (
-        <div className="border-b-[1px] border-slate-200 p-3" key={comment.id}>
-          <CommentItem
-            {...comment}
-            authUser={authUser}
-            upVote={upVoteComment}
-            downVote={downVoteComment}
-            neutralizeVote={neutralizeVoteComment}
-          />
-        </div>
+        <CommentItem
+          key={comment.id}
+          {...comment}
+          authUser={authUser}
+          upVote={upVoteComment}
+          downVote={downVoteComment}
+          neutralizeVote={neutralizeVoteComment}
+        />
       ))}
-    </>
+    </section>
   );
 }
 

@@ -11,6 +11,8 @@ import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 import DetailThreads from './pages/DetailThreadsPage';
 import Loading from './components/elements/loading/Loading';
+import { asyncCreateThread } from './states/threads/action';
+import ErrorPage from './pages/404';
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -26,6 +28,10 @@ function App() {
 
   const onSignOut = () => {
     dispatch(asyncUnsetAuthUser());
+  };
+
+  const onAddThread = ({ title, body, category }) => {
+    dispatch(asyncCreateThread({ title, body, category }));
   };
 
   if (modal) {
@@ -51,14 +57,14 @@ function App() {
       </>
     );
   }
-
   return (
     <>
       <Loading />
       <div className="font-inter">
         <Header logout={onSignOut} authUser={authUser} />
-        {modal && <Modal onToggleModal={toggleModal} />}
+        {modal && <Modal onToggleModal={toggleModal} addThread={onAddThread} />}
         <Routes>
+          <Route path="/*" element={<ErrorPage />} />
           <Route path="/" element={<Threads onToggleModal={toggleModal} />} />
           <Route path="/leaderboards" element={<Leaderboards />} />
           <Route path="/threads/:threadId" element={<DetailThreads />} />

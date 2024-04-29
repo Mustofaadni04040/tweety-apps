@@ -14,7 +14,7 @@ export default function LeaderboardsItem({ user, score }) {
         <p className="text-lg text-slate-400">{user.name}</p>
       </div>
       <div>
-        <p>{score}</p>
+        <p className="text-primary">{score}</p>
       </div>
     </div>
   );

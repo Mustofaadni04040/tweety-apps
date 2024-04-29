@@ -45,7 +45,7 @@ export default function Threads({ onToggleModal }) {
   }));
   return (
     <div className="container mx-auto lg:grid lg:grid-cols-4">
-      <div className="lg:col-span-3 lg:overflow-y-auto lg:min-h-[570px] lg:max-h-[570px]">
+      <div className="lg:col-span-3 lg:overflow-y-auto lg:min-h-screen lg:max-h-screen">
         <AddNewThreads onToggleModal={onToggleModal} />
         <CategoriesThread
           categories={categories}
@@ -63,7 +63,7 @@ export default function Threads({ onToggleModal }) {
           neutralizeVote={onNeutralizeVoteThread}
         />
       </div>
-      <div className="hidden lg:block lg:col-span-1 lg:overflow-y-auto">
+      <div className="hidden lg:block lg:col-span-1 lg:overflow-y-auto lg:min-h-screen">
         <Leaderboards type="AsideLeaderboards" />
       </div>
     </div>

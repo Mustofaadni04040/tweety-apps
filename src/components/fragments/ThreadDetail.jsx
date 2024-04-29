@@ -20,7 +20,7 @@ export default function ThreadDetail({
   authUser,
 }) {
   return (
-    <div>
+    <section>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
           <div className="border border-slate-400 text-slate-400 p-1 max-w-fit rounded-lg ">
@@ -29,7 +29,12 @@ export default function ThreadDetail({
           <p className="text-slate-400 text-sm">{postedAt(createdAt)}</p>
         </div>
 
-        <div>
+        <div className="flex items-center gap-3">
+          <img
+            src={owner.avatar}
+            alt={owner.name}
+            className="w-8 h-8 rounded-full"
+          />
           <p className="text-sm text-slate-400">{owner.name}</p>
         </div>
       </div>
@@ -56,7 +61,7 @@ export default function ThreadDetail({
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

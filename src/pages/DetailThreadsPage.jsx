@@ -58,7 +58,7 @@ export default function DetailThreads() {
     return null;
   }
   return (
-    <div className="container mx-auto max-w-3xl p-5">
+    <div className="container mx-auto max-w-3xl p-5 flex flex-col gap-5">
       <Card>
         <ThreadDetail
           {...threadDetail}
@@ -68,14 +68,15 @@ export default function DetailThreads() {
           neutralizeVoteThreadDetail={onNeutralizeVoteThreadDetail}
         />
         <CommentInput addComment={onCommentSubmit} />
-        <CommentList
-          comments={threadDetail.comments}
-          authUser={authUser.id}
-          upVoteComment={onUpVoteComment}
-          downVoteComment={onDownVoteComment}
-          neutralizeVoteComment={onNeutralizeVoteComment}
-        />
       </Card>
+
+      <CommentList
+        comments={threadDetail.comments}
+        authUser={authUser.id}
+        upVoteComment={onUpVoteComment}
+        downVoteComment={onDownVoteComment}
+        neutralizeVoteComment={onNeutralizeVoteComment}
+      />
     </div>
   );
 }

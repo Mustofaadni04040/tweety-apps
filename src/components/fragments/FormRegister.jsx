@@ -13,8 +13,12 @@ export default function FormRegister({ register }) {
     usernameRef.current.focus();
   }, []);
 
+  function onSubmit(e) {
+    e.preventDefault();
+    register({ name, email, password });
+  }
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <label htmlFor="name" className="text-slate-500 text-sm">
         Username
         <input
@@ -58,7 +62,6 @@ export default function FormRegister({ register }) {
       <Button
         type="submit"
         classname="flex items-center justify-center w-full py-1 px-3 rounded bg-primary text-white hover:bg-[#3825B5] duration-200"
-        onClick={() => register({ name, email, password })}
       >
         Register
       </Button>

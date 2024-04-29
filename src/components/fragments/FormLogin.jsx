@@ -11,8 +11,13 @@ export default function FormLogin({ login }) {
   useEffect(() => {
     emailRef.current.focus();
   }, []);
+
+  function onSubmit(e) {
+    e.preventDefault();
+    login({ email, password });
+  }
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <label htmlFor="email" className="text-slate-500 text-sm">
         Email
         <input
@@ -43,7 +48,6 @@ export default function FormLogin({ login }) {
       <Button
         type="submit"
         classname="flex items-center justify-center w-full py-1 px-3 rounded bg-primary text-white hover:bg-[#3825B5] duration-200"
-        onClick={() => login({ email, password })}
       >
         Login
       </Button>

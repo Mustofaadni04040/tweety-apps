@@ -49,8 +49,13 @@ export default function ThreadItem({
           <p className="text-slate-400 text-sm">{postedAt(createdAt)}</p>
         </div>
 
-        <div>
+        <div className="flex items-center gap-3 ">
           <p className="text-sm text-slate-400">{user.name}</p>
+          <img
+            src={user.avatar}
+            alt={user.name}
+            className="w-8 h-8 rounded-full"
+          />
         </div>
       </div>
 
@@ -61,8 +66,9 @@ export default function ThreadItem({
             role="button"
             onClick={onThreadClick}
             onKeyDown={onThreadPress}
+            className="group"
           >
-            <h1 className="text-lg font-bold text-primary mb-3 break-words">
+            <h1 className="text-lg font-bold text-primary mb-3 break-words group-hover:text-[#3825B5] duration-200">
               {title}
             </h1>
           </div>
