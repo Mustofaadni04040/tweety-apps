@@ -1,10 +1,10 @@
 import React from 'react';
 import parser from 'html-react-parser/lib/index';
 import PropTypes from 'prop-types';
+import { Avatar, Card, CardActions, CardContent } from '@mui/material';
 import postedAt from '../../utils';
 import VoteButton from './VoteButton';
 import { userShape } from './ThreadItem';
-import Card from '../elements/card/Card';
 
 export default function CommentItem({
   id,
@@ -19,24 +19,33 @@ export default function CommentItem({
   authUser,
 }) {
   return (
-    <Card>
-      <div className="flex items-center gap-3 mb-3">
-        <div className="flex items-center gap-3">
-          <img
-            src={owner.avatar}
-            alt={owner.name}
-            className="w-8 h-8 rounded-full"
-          />
-          <p className="text-primary text-xl font-bold">{owner.name}</p>
+    <Card sx={{ p: 1, borderRadius: '12px' }}>
+      <CardContent sx={{ pb: 0 }}>
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center gap-3">
+            <Avatar
+              src={owner.avatar}
+              alt={owner.name}
+              sx={{ width: 30, height: 30 }}
+            />
+            <p className="text-primary text-xl font-bold">{owner.name}</p>
+          </div>
+          <p className="text-slate-400 text-sm">{postedAt(createdAt)}</p>
         </div>
-        <p className="text-slate-400 text-sm">{postedAt(createdAt)}</p>
-      </div>
 
-      <div className="text-base text-slate-500 text-ellipsis mb-3 break-words">
-        {parser(content)}
-      </div>
+        <div className="text-base text-slate-500 text-ellipsis mb-3 break-words">
+          {parser(content)}
+        </div>
+      </CardContent>
 
-      <div className="flex items-center gap-3">
+      <CardActions
+        sx={{
+          ml: 1,
+          display: 'flex',
+          gap: 1,
+          alignItems: 'center',
+        }}
+      >
         <VoteButton
           id={id}
           authUser={authUser}
@@ -46,7 +55,7 @@ export default function CommentItem({
           upVotesBy={upVotesBy}
           downVotesBy={downVotesBy}
         />
-      </div>
+      </CardActions>
     </Card>
   );
 }

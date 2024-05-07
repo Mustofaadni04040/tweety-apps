@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
+import { Avatar } from '@mui/material';
 import { AiOutlineLogout } from 'react-icons/ai';
 import Logo from '../elements/logo/Logo';
 import { userShape } from './ThreadItem';
@@ -55,10 +56,10 @@ export default function Header({ authUser, logout }) {
               <AiOutlineLogout />
               <span className="text-sm">Sign Out</span>
             </button>
-            <img
+            <Avatar
               src={authUser.avatar}
               alt="Profile"
-              className="w-7 h-7 rounded-full"
+              sx={{ width: 30, height: 30 }}
             />
           </div>
         </div>

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/fragments/Header';
 import Threads from './pages/ThreadsPage';
 import Leaderboards from './pages/LeaderboardsPage';
-import Modal from './components/elements/modal/Modal';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { asyncPreloadProcess } from './states/isPreload/action';
@@ -13,10 +12,12 @@ import DetailThreads from './pages/DetailThreadsPage';
 import Loading from './components/elements/loading/Loading';
 import { asyncCreateThread } from './states/threads/action';
 import ErrorPage from './pages/404';
+import ModalThread from './components/elements/modal/Modal';
 
 function App() {
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => setModal(!modal);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const authUser = useSelector((state) => state.authUser);
   const isPreload = useSelector((state) => state.isPreload);
 
@@ -33,12 +34,6 @@ function App() {
   const onAddThread = ({ title, body, category }) => {
     dispatch(asyncCreateThread({ title, body, category }));
   };
-
-  if (modal) {
-    document.body.classList.add('active-modal');
-  } else {
-    document.body.classList.remove('active-modal');
-  }
 
   if (isPreload) {
     return null;
@@ -62,10 +57,16 @@ function App() {
       <Loading />
       <div className="font-inter">
         <Header logout={onSignOut} authUser={authUser} />
-        {modal && <Modal onToggleModal={toggleModal} addThread={onAddThread} />}
+        {open && (
+          <ModalThread
+            onClose={handleClose}
+            addThread={onAddThread}
+            open={open}
+          />
+        )}
         <Routes>
           <Route path="/*" element={<ErrorPage />} />
-          <Route path="/" element={<Threads onToggleModal={toggleModal} />} />
+          <Route path="/" element={<Threads onToggleModal={handleOpen} />} />
           <Route path="/leaderboards" element={<Leaderboards />} />
           <Route path="/threads/:threadId" element={<DetailThreads />} />
         </Routes>

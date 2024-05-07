@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { IoClose } from 'react-icons/io5';
+import { Box, Modal } from '@mui/material';
 import useInput from '../../../hooks/useInput';
 import Button from '../button/Button';
 
-export default function Modal({ onToggleModal, addThread }) {
+export default function ModalThread({ onClose, addThread, open }) {
   const [title, onTitleChange] = useInput('');
   const [category, onCategoryChange] = useInput('');
   const [body, setBody] = useState('');
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '12px',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    '@media (min-width: 700px)': {
+      minWidth: 700,
+    },
+    '@media (max-width: 700px)': {
+      minWidth: 400,
+    },
+  };
 
   function onInputBody(e) {
     setBody(e.target.innerHTML);
@@ -16,14 +34,19 @@ export default function Modal({ onToggleModal, addThread }) {
   function onSubmit(e) {
     e.preventDefault();
     addThread({ title, body, category });
-    onToggleModal();
+    onClose();
   }
   return (
-    <div className="w-screen h-screen top-0 left-0 bottom-0 right-0 fixed z-50 bg-[rgba(0,0,0,0.6)]">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white py-4 px-7 rounded-xl min-w-96 lg:min-w-[700px] lg:max-w-[700px]">
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-xl font-bold text-primary">Buat Diskusi Baru</h2>
-          <button onClick={onToggleModal} type="button" aria-label="close">
+          <button type="button" aria-label="close" onClick={onClose}>
             <IoClose className="text-xl" />
           </button>
         </div>
@@ -37,6 +60,7 @@ export default function Modal({ onToggleModal, addThread }) {
               id="title"
               onChange={onTitleChange}
               value={title}
+              required
               placeholder="Judul"
               className="w-full border border-slate-200 p-1 outline-none rounded focus:ring-1 focus:ring-primary placeholder:text-sm"
             />
@@ -49,6 +73,7 @@ export default function Modal({ onToggleModal, addThread }) {
               id="category"
               onChange={onCategoryChange}
               value={category}
+              required
               placeholder="Kategori"
               className="w-full border border-slate-200 p-1 outline-none rounded focus:ring-1 focus:ring-primary placeholder:text-sm"
             />
@@ -66,11 +91,12 @@ export default function Modal({ onToggleModal, addThread }) {
             Tambah
           </Button>
         </form>
-      </div>
-    </div>
+      </Box>
+    </Modal>
   );
 }
-Modal.propTypes = {
-  onToggleModal: PropTypes.func.isRequired,
+ModalThread.propTypes = {
+  onClose: PropTypes.func.isRequired,
   addThread: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '@mui/material';
 
 export default function CategoriesThread({ categories, filter, setFilter }) {
   return (
@@ -9,25 +10,47 @@ export default function CategoriesThread({ categories, filter, setFilter }) {
         {Array.from(categories).map((category) => {
           if (filter === category) {
             return (
-              <button
+              <Button
                 key={category}
-                className="text-white p-1 border bg-primary border-none rounded-lg"
+                sx={{
+                  color: 'white',
+                  backgroundColor: '#543fdc',
+                  p: 1,
+                  border: 'none',
+                  borderRadius: '12px',
+                  '&:hover': {
+                    color: 'white',
+                    backgroundColor: '#543fdc',
+                    border: 'none',
+                  },
+                }}
                 onClick={() => setFilter('')}
                 type="button"
               >
                 {`#${category}`}
-              </button>
+              </Button>
             );
           }
           return (
-            <button
+            <Button
               key={category}
-              className="text-primary p-1 border border-primary rounded-lg hover:bg-primary hover:text-white duration-200"
+              sx={{
+                color: '#543fdc',
+                backgroundColor: 'transparent',
+                p: 1,
+                border: '1px solid #543fdc',
+                borderRadius: '12px',
+                transitionDuration: '0.4s',
+                '&:hover': {
+                  color: 'white',
+                  backgroundColor: '#543fdc',
+                },
+              }}
               onClick={() => setFilter(category)}
               type="button"
             >
               {`#${category}`}
-            </button>
+            </Button>
           );
         })}
       </div>

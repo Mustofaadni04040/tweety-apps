@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import parser from 'html-react-parser/lib/index';
+import { Avatar } from '@mui/material';
 import { userShape } from './ThreadItem';
 import postedAt from '../../utils';
 import VoteButton from './VoteButton';
@@ -30,10 +31,10 @@ export default function ThreadDetail({
         </div>
 
         <div className="flex items-center gap-3">
-          <img
+          <Avatar
             src={owner.avatar}
             alt={owner.name}
-            className="w-8 h-8 rounded-full"
+            sx={{ width: 30, height: 30 }}
           />
           <p className="text-sm text-slate-400">{owner.name}</p>
         </div>

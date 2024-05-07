@@ -4,9 +4,6 @@
 body {
   background-color: #f4f5f7;
 }
-body.active-modal {
-  overflow-y: hidden;
-}
 ::-webkit-scrollbar {
   width: 3px; /* Lebar scrollbar */
 }

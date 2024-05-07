@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Card } from '@mui/material';
 import {
   asyncCreateComment,
   asyncDownVoteComment,
@@ -11,7 +12,6 @@ import {
   asyncUpVoteComment,
   asyncUpVoteThreadDetail,
 } from '../states/threadDetail/action';
-import Card from '../components/elements/card/Card';
 import ThreadDetail from '../components/fragments/ThreadDetail';
 import CommentInput from '../components/fragments/CommentInput';
 import CommentList from '../components/fragments/CommentList';
@@ -59,7 +59,7 @@ export default function DetailThreads() {
   }
   return (
     <div className="container mx-auto max-w-3xl p-5 flex flex-col gap-5">
-      <Card>
+      <Card sx={{ p: 3, borderRadius: '12px' }}>
         <ThreadDetail
           {...threadDetail}
           authUser={authUser.id}

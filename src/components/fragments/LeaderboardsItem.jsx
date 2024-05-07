@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Avatar } from '@mui/material';
 import { userShape } from './ThreadItem';
 
 export default function LeaderboardsItem({ user, score }) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-5">
-        <img
+        <Avatar
           src={user.avatar}
           alt={user.name}
-          className="w-12 h-12 rounded-full"
+          sx={{ width: 45, height: 45 }}
         />
         <p className="text-lg text-slate-400">{user.name}</p>
       </div>

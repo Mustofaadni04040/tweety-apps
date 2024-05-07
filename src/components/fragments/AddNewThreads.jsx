@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiPlusSm } from 'react-icons/hi';
 import PropTypes from 'prop-types';
-import Card from '../elements/card/Card';
+import { Card, CardActions } from '@mui/material';
 import Button from '../elements/button/Button';
 
 export default function AddNewThreads({ onToggleModal }) {
@@ -19,18 +19,20 @@ export default function AddNewThreads({ onToggleModal }) {
         role="button"
         tabIndex={0}
       >
-        <Card>
+        <Card sx={{ p: 1, borderRadius: '12px' }}>
           <div className="flex items-center justify-between">
             <h1 className="text-sm text-slate-400 group-hover:text-primary group-hover:duration-200">
               Buat diskusi baru
             </h1>
-            <Button
-              classname="bg-primary p-2 rounded-xl group-hover:bg-[#3825B5] duration-200"
-              type="button"
-              onClick={onToggleModal}
-            >
-              <HiPlusSm className="text-white text-lg" />
-            </Button>
+            <CardActions>
+              <Button
+                classname="bg-primary p-2 rounded-xl group-hover:bg-[#3825B5] duration-200"
+                type="button"
+                onClick={onToggleModal}
+              >
+                <HiPlusSm className="text-white text-lg" />
+              </Button>
+            </CardActions>
           </div>
         </Card>
       </div>
