@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineComment } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import CommentItem, { commentShape } from './CommentItem';
 
@@ -11,7 +12,13 @@ export default function CommentList({
 }) {
   if (comments.length === 0) {
     return (
-      <p className="text-slate-400 text-center mt-5">Belum ada komentar</p>
+      <div className="mt-5 flex flex-col items-center">
+        <AiOutlineComment className="text-slate-400 text-9xl" />
+        <p className="text-slate-400 text-lg">Belum ada komentar</p>
+        <p className="text-slate-400 text-sm">
+          Jadilah pertama yang berkomentar
+        </p>
+      </div>
     );
   }
   return (
