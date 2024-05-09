@@ -9,7 +9,8 @@
     "lint": "eslint ./src --ext .jsx --ext .js",
     "preview": "vite preview",
     "test": "vitest",
-    "e2e": "cypress run"
+    "e2e": "cypress run",
+    "ci:test": "vitest --no-watch && start-server-and-test dev http-get://localhost:5173 e2e"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -43,6 +44,7 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^24.0.0",
     "postcss": "^8.4.38",
+    "start-server-and-test": "^2.0.3",
     "tailwindcss": "^3.4.3",
     "vite": "^4.4.5",
     "vitest": "^1.6.0"
