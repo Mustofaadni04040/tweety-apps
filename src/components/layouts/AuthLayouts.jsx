@@ -8,18 +8,14 @@ export default function AuthLayouts({ type, children }) {
       <div className="w-full max-w-xs">
         {type === 'login' ? (
           <div className="mb-3">
-            <h1 className="text-4xl text-primary font-bold mb-2">
-              Login Thread.
-            </h1>
+            <h1 className="text-4xl text-primary font-bold mb-2">Login</h1>
             <p className="text-slate-500 text-sm">
               Silahkan masukan username dan password anda
             </p>
           </div>
         ) : (
           <div className="mb-3">
-            <h1 className="text-4xl text-primary font-bold mb-2">
-              Register Thread.
-            </h1>
+            <h1 className="text-4xl text-primary font-bold mb-2">Register</h1>
             <p className="text-slate-500 text-sm">
               Silahkan daftar terlebih dahulu
             </p>
