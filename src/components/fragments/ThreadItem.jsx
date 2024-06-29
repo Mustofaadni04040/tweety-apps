@@ -32,11 +32,13 @@ export default function ThreadItem({
 
   function onThreadClick() {
     navigate(`/threads/${id}`);
+    window.scrollTo(0, 0);
   }
 
   function onThreadPress(e) {
     if (e.key === 'Enter' || e.key === ' ') {
       navigate(`/threads/${id}`);
+      window.scrollTo(0, 0);
     }
   }
 
